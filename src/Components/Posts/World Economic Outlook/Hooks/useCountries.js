@@ -1,19 +1,19 @@
 import { useState, useEffect } from 'react';
 
 function useCountries() {
-  const [countries, setCountries] = useState([]);
+    const [countries, setCountries] = useState([]);
 
-  useEffect(() => {
-    async function fetchCountries() {
-      const response = await fetch('http://localhost:5000/weo/countries');
-      const data = await response.json();
-      setCountries(data);
-    }
+    useEffect(() => {
+        async function fetchCountries() {
+            const response = await fetch('http://localhost:5000/weo/countries');
+            const data = await response.json();
+            setCountries(data);
+        }
 
-    fetchCountries();
-  }, []);
+        fetchCountries();
+    }, []);
 
-  return countries;
+    return countries;
 }
 
 export default useCountries;

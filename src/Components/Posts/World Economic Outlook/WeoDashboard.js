@@ -16,11 +16,6 @@ export const WeoDashboard = () => {
     const subjects = useSubjects();
     const series = useSeriesWithCache(curCountryID, curSubjectID);  // cache the series data based on current countryId and subjectId
     const theme = useTheme();
-
-
-    console.log(curCountryID);
-    console.log(curSubjectID);
-    console.log(series);
     
     const handleCountrySelect = (curCountryID) => {
         setCurCountryID(curCountryID);
@@ -54,7 +49,7 @@ export const WeoDashboard = () => {
                 </Grid>
                 <Grid item xs={6}>
                     <Typography variant='h3'>{curCountryID ? getCountryById(curCountryID) : 'Select a country'}</Typography>
-                    <Typography variant='h6'>{curSubjectID ? getSubjectById(curSubjectID, 'descriptor') : 'Select a category descriptor'}</Typography>
+                    <Typography variant='h6'>{curSubjectID ? `${getSubjectById(curSubjectID, 'descriptor')} | ${getSubjectById(curSubjectID, 'units')}` : 'Select a category descriptor'}</Typography>
                 </Grid>
                 <Grid item xs={2} sx={{display: 'flex', justifyContent: 'center'}}>
                     <IconButton onClick={() => setShowInfo(!showInfo)}>
@@ -63,8 +58,7 @@ export const WeoDashboard = () => {
                     </IconButton>
                 </Grid>
                 <Grid item xs={8}>
-                    {curCountryID && curSubjectID ? <Typography variant='body1'>{getSubjectById(curSubjectID, 'units')}</Typography> : null}
-                    {curCountryID && curSubjectID ? <WeoLineChart data={series} /> : null}
+                    {curCountryID && curSubjectID ? <WeoLineChart data={series} estimates_start={getSeriesByIds(curCountryID, curSubjectID, 'estimates_start')} /> : null}
                 </Grid>
                 <Grid item xs={4}>
                     {showInfo && 
@@ -72,6 +66,7 @@ export const WeoDashboard = () => {
                         <Typography variant='body1'>{getSubjectById(curSubjectID, 'notes')}</Typography>
                         <Typography variant='h6'>Notes specific to {getCountryById(curCountryID)}</Typography>
                         <Typography variant='body1'>{getSeriesByIds(curCountryID, curSubjectID, 'notes')}</Typography>
+                        <Typography variant='body1'>Estimations for this series begin in {getSeriesByIds(curCountryID, curSubjectID, 'estimates_start')}.</Typography>
                     </Paper>}
                 </Grid>
             </Grid>            

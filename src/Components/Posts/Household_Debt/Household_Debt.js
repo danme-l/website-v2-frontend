@@ -3,11 +3,6 @@ import moment from 'moment/moment';
 
 // mui
 import { Box, Typography, Button, IconButton, Paper, Grid, Slider, List, ListItem, Drawer } from '@mui/material';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import { useTheme } from '@mui/material/styles';
 //recharts
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, ReferenceLine, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
