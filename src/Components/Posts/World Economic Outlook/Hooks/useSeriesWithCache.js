@@ -6,7 +6,7 @@ function useSeriesWithCache(countryId, subjectId) {
 
     useEffect(() => {
         async function fetchSeries() {
-            const response = await axios.get(`http://localhost:5000/weo/series?countryId=${countryId}&subjectId=${subjectId}`);
+            const response = await axios.get(`https://website-v2-backend.onrender.com/weo/series?countryId=${countryId}&subjectId=${subjectId}`);
             setSeries(response.data.sort((y1, y2) => y1.year - y2.year));
         }
 
