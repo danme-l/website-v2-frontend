@@ -5,7 +5,7 @@ function useCountries() {
 
     useEffect(() => {
         async function fetchCountries() {
-            const response = await fetch('http://localhost:5000/weo/countries');
+            const response = await fetch('https://website-v2-backend.onrender.com/weo/countries');
             const data = await response.json();
             setCountries(data);
         }

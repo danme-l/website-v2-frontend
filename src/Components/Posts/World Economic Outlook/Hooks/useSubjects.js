@@ -5,7 +5,7 @@ function useSubjects() {
 
     useEffect(() => {
         async function fetchSubjects() {
-            const response = await fetch('http://localhost:5000/weo/subjects');
+            const response = await fetch('https://website-v2-backend.onrender.com/weo/subjects');
             const data = await response.json();
             setSubjects(data)
         }

@@ -27,7 +27,7 @@ export const HouseholdDebt = () => {
 
     // fetches data from my API currently at localhost 
     function getData() { 
-        fetch('http://localhost:5000/econ/household_debt')
+        fetch('https://website-v2-backend.onrender.com/econ/household_debt')
             .then(response => {
                 return response.json(); 
             })
