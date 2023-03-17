@@ -15,6 +15,8 @@ import PageNotFound from './Components/Misc/PageNotFound';
 import PageInProgress from './Components/Misc/PageInProgress';
 import { HouseholdDebt } from './Components/Posts/Household_Debt/Household_Debt';
 import { WeoDashboard } from './Components/Posts/World Economic Outlook/WeoDashboard';
+import { About } from './Components/About/About';
+import { Contact } from './Components/Contact';
 
 function App() {
   return (
@@ -42,8 +44,8 @@ function App() {
               <Route name="household_debt" path='/household_debt' element={<HouseholdDebt />} /> 
               <Route name="world_econ_outlook" path='/world_econ_outlook' element={<WeoDashboard />} /> 
               <Route name="posts" path="/posts" element={<PageInProgress pageName={'Posts'} />} />
-              <Route name="about" path="/about" element={<PageInProgress pageName={'About'} />} />
-              <Route name="contact" path="/contact" element={<PageInProgress pageName={'Contact'} />} />
+              <Route name="about" path="/about" element={<About />} />
+              <Route name="contact" path="/contact" element={<Contact />} />
               <Route name="404" path='*' element={<PageNotFound />} />
             </Routes>
           </Box>

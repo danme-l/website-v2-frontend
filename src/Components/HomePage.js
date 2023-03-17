@@ -6,19 +6,6 @@ import { Box } from '@mui/system';
 import Link from '@mui/material/Link';
 import { HomeCard } from './HomeCard';
 
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
-
 export const HomePage = () => {
   return (
     <Box sx={{ my: 4, mx: 16 }}>
@@ -74,7 +61,6 @@ export const HomePage = () => {
             </Grid>
             
         </Grid>
-        <Copyright sx={{ pt: 4 }} />
     </Box>
   );
 }
