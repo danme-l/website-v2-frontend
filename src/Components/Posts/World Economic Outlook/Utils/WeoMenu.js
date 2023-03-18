@@ -38,6 +38,13 @@ const WeoMenu = ({ data, selectionKeys, handleSelect }) => {
         }}
       >
         {data.map((c) => {
+            // handle adding the units for the descriptor items
+            let menuItem;
+            if (selectionKeys.value2) {
+              menuItem = `${c[selectionKeys.value]}, ${c[selectionKeys.value2]}`;
+            } else {
+              menuItem = `${c[selectionKeys.value]}`;
+            }
             return (
                 <MenuItem 
                   key={c[selectionKeys.id]} 
@@ -45,7 +52,7 @@ const WeoMenu = ({ data, selectionKeys, handleSelect }) => {
                     handleSelect(c[selectionKeys.id])
                     handleClose()
                     }}>
-                    {c[selectionKeys.value]}
+                    {menuItem}
                 </MenuItem>
             )
         })}
