@@ -1,34 +1,43 @@
-import { Box, Typography, List, ListItem } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
 import useMoneySupply from './Hooks/useMoneySupply';
+import MoneySupplyLineChart from './Charts/MoneySupplyLineChart';
 
 export const MoneySupplyDash = () => {
     const moneySupply = useMoneySupply();
 
-    console.log(moneySupply);
-
-    const getMostRecentByCountry = (c) => {
+    function getMostRecentByCountry(c) {
+        // in case it hasn't loaded yet
+        if (moneySupply.length === 0) {
+            return new Array();
+        }
         const maxDate = moneySupply.reduce((max, obj) => obj.date > max ? obj.date : max, moneySupply[0].date);
         return moneySupply.filter(obj => obj.date === maxDate && obj.country === c);
     }
 
-    console.log(getMostRecentByCountry('CAN'));
+    function getValuesByTypeAndCountry(t,c) {
+        // in case it hasn't loaded yet
+        if (moneySupply.length === 0) {
+            return new Array();
+        }
+        return moneySupply.filter(obj => obj.country === c && obj.type === t);
+    }
     
     return (
         <Box sx={{m:2}}>
             <Typography variant='h1'>Money Supply</Typography>
             <Typography variant='h5'>How much money exists in various places?</Typography>
             <Typography variant='body1'>[This page is a work in progress...]</Typography>
-
             <Typography variant='h5'>Canada</Typography>
-            <List>
-                {Object.keys(getMostRecentByCountry('CAN')).map((o) => (
-                        <ListItem k={o.id}>
-                            {/* <Typography variant='body1'>{o.date}</Typography>
-                            <Typography variant='body1'>{o.type}</Typography>
-                            <Typography variant='body1'>{o.value}</Typography> */}
-                        </ListItem>
-                    ))}
-            </List>
+            <MoneySupplyLineChart data={getValuesByTypeAndCountry('M1', 'CAN')} />
+            {/* <List>
+                {getValuesByTypeAndCountry('M1','CAN').map((o) => (
+                    <ListItem key={o.id}>
+                        <ListItemText primary={o.type}/>
+                        <ListItemText primary={o.date}/>
+                        <ListItemText primary={o.value}/>
+                    </ListItem>
+                ))}
+            </List> */}
         </Box>
     )
 }
