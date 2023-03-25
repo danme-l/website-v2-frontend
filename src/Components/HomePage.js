@@ -37,7 +37,12 @@ export const HomePage = () => {
             </Grid>
 
             <Grid item xs={12} md={6} lg={4} xl={3}>
-                <HomeCard />
+                <HomeCard imgLink={"/static/cards/bills.jpeg"} 
+                    title='Money Supply' 
+                    desc="How much money exists? M0, M1, etc"
+                    disableCard={false}
+                    link='/money_supply'
+                />
             </Grid>
 
             <Grid item xs={12} md={6} lg={4} xl={3}>
