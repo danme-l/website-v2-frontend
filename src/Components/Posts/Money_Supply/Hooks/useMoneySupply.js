@@ -5,7 +5,7 @@ function useMoneySupply() {
 
     useEffect(() => {
         async function fetchMoneySupply() {
-            const response = await fetch('http://127.0.0.1:5000/money_supply');
+            const response = await fetch('https://website-v2-backend.onrender.com/money_supply');
             const data = await response.json();
             console.log(data);
             setMoneySupply(data);
