@@ -11,25 +11,24 @@ const MoneySupplyLineChart = ({data}) => {
         currency: 'USD',
       });
 
-    function roundToNearest100(value) {
-        return Math.round(value/100) * 100;
+    function roundUpToNearest100(value) {
+        return Math.ceil(value/100) * 100;
     }
 
     function getMaxValue() {
         return data.reduce((max, obj) => obj.value > max ? obj.value : max, data[0].value);
     }
-    console.log(data)
 
     return (
         <ResponsiveContainer width='100%' aspect={3.5}>
-            <LineChart margin={{top: 5, bottom: 5, left: 20, right: 20}} data={data} width={500} height={300}>
+            <LineChart margin={{top: 5, bottom: 5, left: 30, right: 20}} data={data} width={500} height={300}>
                 <CartesianGrid strokeDasharray="3 3" />
-                <XAxis dataKey='date' tickFormatter={(t) => moment(t).format("MMM 'YY")}/>
+                <XAxis dataKey='date' tickFormatter={(t) => moment(t).format("MMM 'YY")} tickMargin={5}/>
                 <YAxis 
                     type='number' 
                     tickFormatter={(a) => moneyFormatter.format(a)} 
-                    domain={[0, dataMax => roundToNearest100(dataMax)]}
-                    padding={0}
+                    domain={[0, dataMax => roundUpToNearest100(dataMax)]}
+                    tickCount={8}
                     />
                 <Tooltip />
                 <Line type='monotone' dataKey="value" stroke={theme.palette.primary.main}/>

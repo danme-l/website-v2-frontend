@@ -1,9 +1,28 @@
+import React, { useState } from 'react';
 import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
 import useMoneySupply from './Hooks/useMoneySupply';
 import MoneySupplyLineChart from './Charts/MoneySupplyLineChart';
+import RadioButtonsGroup from './Utils/RadioButtons';
 
 export const MoneySupplyDash = () => {
+    const [curType, setCurType] = useState('M0')
+    const [curCountry, setCurCountry] = useState(null)
     const moneySupply = useMoneySupply();
+
+    const handleTypeChange = (event) => {
+        setCurType(event.target.value);
+    };
+
+    const handleCountryChange = (event) => {
+        setCurCountry(event.target.value);
+    };
+
+    const buttonDisabler = () => {
+        // so the button is disabled but still appears
+        if (curCountry == 'USA') {
+            return 'M3'
+        }
+    }
 
     function getMostRecentByCountry(c) {
         // in case it hasn't loaded yet
@@ -26,18 +45,23 @@ export const MoneySupplyDash = () => {
         <Box sx={{m:2}}>
             <Typography variant='h1'>Money Supply</Typography>
             <Typography variant='h5'>How much money exists in various places?</Typography>
-            <Typography variant='body1'>[This page is a work in progress...]</Typography>
             <Typography variant='h5'>Canada</Typography>
-            <MoneySupplyLineChart data={getValuesByTypeAndCountry('M1', 'CAN')} />
-            {/* <List>
-                {getValuesByTypeAndCountry('M1','CAN').map((o) => (
-                    <ListItem key={o.id}>
-                        <ListItemText primary={o.type}/>
-                        <ListItemText primary={o.date}/>
-                        <ListItemText primary={o.value}/>
-                    </ListItem>
-                ))}
-            </List> */}
+            <MoneySupplyLineChart data={getValuesByTypeAndCountry(curType, curCountry)} />
+            <Box display={'flex'} flexDirection={'column'}>
+                <RadioButtonsGroup 
+                    type={curType} 
+                    handleChange={handleTypeChange} 
+                    label={'Money Supply Type'} 
+                    buttons={['M0','M1','M2','M3']}
+                    disable={buttonDisabler()}
+                />
+                <RadioButtonsGroup 
+                    type={curCountry} 
+                    handleChange={handleCountryChange} 
+                    label={'Country'} 
+                    buttons={['CAN','USA']}
+                />
+            </Box>
         </Box>
     )
 }
