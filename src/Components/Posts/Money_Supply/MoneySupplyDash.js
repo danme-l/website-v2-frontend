@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Typography, List, ListItem, ListItemText } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
 import useMoneySupply from './Hooks/useMoneySupply';
 import MoneySupplyLineChart from './Charts/MoneySupplyLineChart';
 import RadioButtonsGroup from './Utils/RadioButtons';
@@ -43,9 +43,19 @@ export const MoneySupplyDash = () => {
     
     return (
         <Box sx={{m:2}}>
-            <Typography variant='h1'>Money Supply</Typography>
-            <Typography variant='h5'>How much money exists in various places?</Typography>
-            <Typography variant='h5'>Canada</Typography>
+            {/* Header */}
+            <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
+                <Box sx={{mx:2}}>
+                    <Typography variant='h1'>Money Supply</Typography>
+                    <Typography variant='body1'>How much money exists in various places?</Typography>
+                </Box>
+                <Box sx={{mx:2}}>
+                    {/* For now there's only two countries */}
+                    <Typography variant='h5'>{curCountry === "CAN" ? 'Canada' : 'United States'} | {curType}</Typography> 
+                    <Typography variant='body1'>Values given in billions of the local currency.</Typography>
+                </Box>
+            </Box>           
+            <Divider sx={{my:2}}/>            
             <MoneySupplyLineChart data={getValuesByTypeAndCountry(curType, curCountry)} />
             <Box display={'flex'} flexDirection={'column'}>
                 <RadioButtonsGroup 

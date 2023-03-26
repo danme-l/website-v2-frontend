@@ -1,6 +1,7 @@
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ResponsiveContainer } from 'recharts';
 import moment from 'moment';
 import { useTheme } from '@mui/material/styles';
+import CustomTooltip from './CustomToolTip';
 
 const MoneySupplyLineChart = ({data}) => {
     const theme = useTheme();
@@ -9,7 +10,7 @@ const MoneySupplyLineChart = ({data}) => {
     const moneyFormatter = new Intl.NumberFormat('en-US', {
         style: 'currency',
         currency: 'USD',
-      });
+    });
 
     function roundUpToNearest100(value) {
         return Math.ceil(value/100) * 100;
@@ -30,7 +31,7 @@ const MoneySupplyLineChart = ({data}) => {
                     domain={[0, dataMax => roundUpToNearest100(dataMax)]}
                     tickCount={8}
                     />
-                <Tooltip />
+                <Tooltip content={<CustomTooltip moneyFormatter={moneyFormatter} />}/>
                 <Line type='monotone' dataKey="value" stroke={theme.palette.primary.main}/>
             </LineChart>
         </ResponsiveContainer>
