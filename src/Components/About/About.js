@@ -1,4 +1,4 @@
-import { Typography, Box, Zoom, Button } from "@mui/material";
+import { Typography, Box, Zoom, Button, Grid } from "@mui/material";
 import Pics from "./Pics";
 import { NavLink } from "react-router-dom";
 import { useState } from "react";
@@ -22,7 +22,20 @@ export const About = () => {
             <Typography variant="h1">About</Typography>
             <Button onClick={switchToMe}>About Me</Button>
             <Button onClick={switchToSite}>About this website</Button>
-            <Box display={'flex'} flexDirection={'row'} sx={{mt: 3}}>
+            <Grid container spacing={2}>
+                <Grid item xs={4}>
+                    <Pics />
+                </Grid>
+                <Grid item xs={8}>
+                    <Zoom in={aboutMe} style={{ transitionDelay: aboutMe ? '200ms' : '0ms' }} mountOnEnter unmountOnExit>
+                        {AboutMe}
+                    </Zoom>
+                    <Zoom in={aboutSite} style={{ transitionDelay: aboutSite ? '200ms' : '0ms' }} mountOnEnter unmountOnExit>
+                        {AboutSite}
+                    </Zoom>
+                </Grid>
+            </Grid>
+            {/* <Box display={'flex'} flexDirection={'row'} sx={{mt: 3}}>
                 <Pics />
                 <Zoom in={aboutMe} style={{ transitionDelay: aboutMe ? '200ms' : '0ms' }} mountOnEnter unmountOnExit>
                     {AboutMe}
@@ -30,7 +43,7 @@ export const About = () => {
                 <Zoom in={aboutSite} style={{ transitionDelay: aboutSite ? '200ms' : '0ms' }} mountOnEnter unmountOnExit>
                     {AboutSite}
                 </Zoom>
-            </Box>
+            </Box> */}
         </Box>
     )   
 }
@@ -38,7 +51,7 @@ export const About = () => {
 
 
 const AboutMe = (
-    <Box sx={{mx: 30, my: 5}}>
+    <Box sx={{m: 5}}>
         <Typography variant="h2">I am Dan</Typography>
         <Typography variant="body">
             I'm currently working at the Canada Revenue Agency's Applied Predictive Analytics Section as a Junior Data Scientist. 
@@ -50,8 +63,19 @@ const AboutMe = (
 )
 
 const AboutSite = (
-    <Box sx={{mx: 30, my: 5}}>
+    <Box sx={{m: 5}}>
         <Typography variant="h2">About this website</Typography>
+        <Typography variant="h3">Inspiration</Typography>
+        <Typography variant="body1">
+            Like many, I became super interested in the Macro Economy and Finance during the economic destruction 
+            caused by the Covid Pandemic.
+        </Typography>    
+        <Typography variant="body1">
+            Though I had started learning a little before, I also learned to code during the pandemic (also like many).
+        </Typography>    
+        <Typography variant="body1">
+            This website is a culmination of those two interests.
+        </Typography>
         <Typography variant="h3">Technologies</Typography>
         <Typography variant="body1">
             The Front end of the website built with React, and I make heavy use of <NavLink to='https://mui.com/material-ui/getting-started/overview/'>Material UI</NavLink> for styling. 
