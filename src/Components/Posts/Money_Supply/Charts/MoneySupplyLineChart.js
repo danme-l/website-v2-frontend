@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, Brush, ResponsiveContainer } from 'recharts';
 import moment from 'moment';
 import { useTheme } from '@mui/material/styles';
 import CustomTooltip from './CustomToolTip';
@@ -33,6 +33,7 @@ const MoneySupplyLineChart = ({data}) => {
                     />
                 <Tooltip content={<CustomTooltip moneyFormatter={moneyFormatter} />}/>
                 <Line type='monotone' dataKey="value" stroke={theme.palette.primary.main}/>
+                <Brush dataKey='date'/>
             </LineChart>
         </ResponsiveContainer>
     )

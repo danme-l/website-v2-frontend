@@ -22,7 +22,7 @@ const Pics = () => {
   
     return (
         <Fade in={true} key={index} timeout={1000}>
-            <img src={picList[index]} height={'20%'} width={'20%'} alt="Shuffled image" />
+            <img src={picList[index]} width={'80%'} alt="Shuffled image" />
         </Fade>
     )
   };
