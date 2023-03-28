@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
-import { Box, Typography, List, ListItem, ListItemText, Divider } from '@mui/material';
+import { Box, Typography, List, ListItem, ListItemText, Zoom, Divider, IconButton, Button, Grid } from '@mui/material';
+import InfoIcon from '@mui/icons-material/Info';
 import useMoneySupply from './Hooks/useMoneySupply';
 import MoneySupplyLineChart from './Charts/MoneySupplyLineChart';
 import RadioButtonsGroup from './Utils/RadioButtons';
+import InfoBox from './Utils/InfoBox';
 
 export const MoneySupplyDash = () => {
-    const [curType, setCurType] = useState('M0')
-    const [curCountry, setCurCountry] = useState(null)
+    const [showInfo, setShowInfo] = useState(false);
+    const [curType, setCurType] = useState('M0');
+    const [curCountry, setCurCountry] = useState(null);
+    const [expandGraph, setExpandGraph] = useState(false);
     const moneySupply = useMoneySupply();
 
     const handleTypeChange = (event) => {
@@ -54,24 +58,40 @@ export const MoneySupplyDash = () => {
                     <Typography variant='h5'>{curCountry === "CAN" ? 'Canada' : 'United States'} | {curType}</Typography> 
                     <Typography variant='body1'>Values given in billions of the local currency.</Typography>
                 </Box>
+                <IconButton onClick={() => setShowInfo(!showInfo)}>
+                    <InfoIcon />
+                </IconButton>
             </Box>           
-            <Divider sx={{my:2}}/>            
-            <MoneySupplyLineChart data={getValuesByTypeAndCountry(curType, curCountry)} />
-            <Box display={'flex'} flexDirection={'column'}>
-                <RadioButtonsGroup 
-                    type={curType} 
-                    handleChange={handleTypeChange} 
-                    label={'Money Supply Type'} 
-                    buttons={['M0','M1','M2','M3']}
-                    disable={buttonDisabler()}
-                />
-                <RadioButtonsGroup 
-                    type={curCountry} 
-                    handleChange={handleCountryChange} 
-                    label={'Country'} 
-                    buttons={['CAN','USA']}
-                />
-            </Box>
+            <Divider sx={{my:2}}/>
+            <Grid container>
+                <Grid item xs={expandGraph ? 12 : 8}>
+                    <MoneySupplyLineChart data={getValuesByTypeAndCountry(curType, curCountry)} />
+                </Grid>
+                <Grid item xs={3}>
+                    <Box display={'flex'} flexDirection={'column'}>
+                        <RadioButtonsGroup 
+                            type={curType} 
+                            handleChange={handleTypeChange} 
+                            label={'Money Supply Type'} 
+                            buttons={['M0','M1','M2','M3']}
+                            disable={buttonDisabler()}
+                        />
+                        <RadioButtonsGroup 
+                            type={curCountry} 
+                            handleChange={handleCountryChange} 
+                            label={'Country'} 
+                            buttons={['CAN','USA']}
+                        />
+                        <Button 
+                            sx={{width:'50%'}} 
+                            variant='contained'
+                            onClick={() => setExpandGraph(!expandGraph)}
+                            >
+                            Expand Graph
+                        </Button>
+                    </Box>
+                </Grid>
+            </Grid>
         </Box>
     )
 }
