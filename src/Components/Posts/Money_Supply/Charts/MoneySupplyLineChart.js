@@ -21,8 +21,8 @@ const MoneySupplyLineChart = ({data}) => {
     }
 
     return (
-        <ResponsiveContainer width='100%' aspect={3.5}>
-            <LineChart margin={{top: 5, bottom: 5, left: 30, right: 20}} data={data} width={500} height={300}>
+        <ResponsiveContainer width='100%' aspect={3}>
+            <LineChart margin={{top: 5, bottom: 5, left: 30, right: 20}} data={data} width={'100%'} height={300}>
                 <CartesianGrid strokeDasharray="3 3" />
                 <XAxis dataKey='date' tickFormatter={(t) => moment(t).format("MMM 'YY")} tickMargin={5}/>
                 <YAxis 
@@ -32,8 +32,8 @@ const MoneySupplyLineChart = ({data}) => {
                     tickCount={8}
                     />
                 <Tooltip content={<CustomTooltip moneyFormatter={moneyFormatter} />}/>
-                <Line type='monotone' dataKey="value" stroke={theme.palette.primary.main}/>
-                <Brush dataKey='date'/>
+                <Line type='monotone' dataKey="value" stroke={theme.palette.primary.main} dot={false}/>
+                <Brush dataKey='date' tickFormatter={(t) => moment(t).format("MMM 'YY")} travellerWidth={15}/>
             </LineChart>
         </ResponsiveContainer>
     )

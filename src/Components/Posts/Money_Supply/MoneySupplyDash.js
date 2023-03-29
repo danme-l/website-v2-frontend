@@ -1,17 +1,50 @@
-import React, { useState } from 'react';
-import { Box, Typography, List, ListItem, ListItemText, Zoom, Divider, IconButton, Button, Grid } from '@mui/material';
+import React, { useEffect, useState } from 'react';
+import { Box, Typography, List, Divider, IconButton, Button, Grid, Card, CardMedia } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import useMoneySupply from './Hooks/useMoneySupply';
 import MoneySupplyLineChart from './Charts/MoneySupplyLineChart';
 import RadioButtonsGroup from './Utils/RadioButtons';
 import InfoBox from './Utils/InfoBox';
 
+function getEarliestDate(entries) {
+    if (entries.length === 0) {
+      return null;
+    }
+    let earliestDate = new Date(entries[0].date);
+    for (let i = 1; i < entries.length; i++) {
+      const entryDate = new Date(entries[i].date);
+      if (entryDate < earliestDate) {
+        earliestDate = entryDate;
+      }
+    }
+    return earliestDate;
+  }
+  
+function getLatestDate(entries) {
+    if (entries.length === 0) {
+      return null;
+    }
+    let latestDate = new Date(entries[0].date);
+    for (let i = 1; i < entries.length; i++) {
+      const entryDate = new Date(entries[i].date);
+      if (entryDate > latestDate) {
+        latestDate = entryDate;
+      }
+    }
+    return latestDate;
+  }
+
 export const MoneySupplyDash = () => {
     const [showInfo, setShowInfo] = useState(false);
     const [curType, setCurType] = useState('M0');
     const [curCountry, setCurCountry] = useState(null);
+    const [dateRange, setDateRange] = useState([]);
     const [expandGraph, setExpandGraph] = useState(false);
     const moneySupply = useMoneySupply();
+
+    useEffect(() => {
+        setDateRange([getEarliestDate(moneySupply), getLatestDate(moneySupply)]);
+    }, []);
 
     const handleTypeChange = (event) => {
         setCurType(event.target.value);
@@ -26,7 +59,7 @@ export const MoneySupplyDash = () => {
         if (curCountry == 'USA') {
             return 'M3'
         }
-    }
+    };
 
     function getMostRecentByCountry(c) {
         // in case it hasn't loaded yet
@@ -44,12 +77,19 @@ export const MoneySupplyDash = () => {
         }
         return moneySupply.filter(obj => obj.country === c && obj.type === t);
     }
+
+    function filterEntriesByDate(entries, date1, date2) {
+        return entries.filter(entry => {
+          const entryDate = new Date(entry.date);
+          return entryDate >= date1 && entryDate <= date2;
+        });
+      }
     
     return (
         <Box sx={{m:2}}>
             {/* Header */}
             <Box display={'flex'} flexDirection={'row'} alignItems={'center'}>
-                <Box sx={{mx:2}}>
+                <Box sx={{mx:4}}>
                     <Typography variant='h1'>Money Supply</Typography>
                     <Typography variant='body1'>How much money exists in various places?</Typography>
                 </Box>
@@ -67,7 +107,7 @@ export const MoneySupplyDash = () => {
                 <Grid item xs={expandGraph ? 12 : 8}>
                     <MoneySupplyLineChart data={getValuesByTypeAndCountry(curType, curCountry)} />
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={expandGraph ? 5 : 3}>
                     <Box display={'flex'} flexDirection={'column'}>
                         <RadioButtonsGroup 
                             type={curType} 
@@ -87,9 +127,24 @@ export const MoneySupplyDash = () => {
                             variant='contained'
                             onClick={() => setExpandGraph(!expandGraph)}
                             >
-                            Expand Graph
+                            {expandGraph ?  "Collapse Graph" : "Expand Graph"}
                         </Button>
                     </Box>
+                </Grid>
+            </Grid>
+            <Divider />
+            <Grid container>
+                <Grid item xs={8}>
+                    <InfoBox type={curType}/>
+                </Grid>
+                <Grid item xs={4}>
+                    <Card sx={{m:3}}>
+                        <CardMedia
+                            sx={{width:'100%', height:500}}
+                            image={'/static/dalleGenerated/stackOfCash.png'}
+                            title="guy thinking"
+                        />
+                    </Card>
                 </Grid>
             </Grid>
         </Box>
