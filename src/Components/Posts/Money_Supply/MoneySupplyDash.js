@@ -5,6 +5,7 @@ import useMoneySupply from './Hooks/useMoneySupply';
 import MoneySupplyLineChart from './Charts/MoneySupplyLineChart';
 import RadioButtonsGroup from './Utils/RadioButtons';
 import InfoBox from './Utils/InfoBox';
+import DallEPictureCard from '../../Utils/DallEPictureCar';
 
 function getEarliestDate(entries) {
     if (entries.length === 0) {
@@ -138,13 +139,7 @@ export const MoneySupplyDash = () => {
                     <InfoBox type={curType}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <Card sx={{m:3}}>
-                        <CardMedia
-                            sx={{width:'100%', height:500}}
-                            image={'/static/dalleGenerated/stackOfCash.png'}
-                            title="guy thinking"
-                        />
-                    </Card>
+                    <DallEPictureCard />
                 </Grid>
             </Grid>
         </Box>

@@ -12,9 +12,18 @@ function M0Box() {
 
 function M1Box() {
     return (
-        <Typography variant="body1">
-            This is everything in M0, plus ...
-        </Typography>
+        <Box>
+            <Typography variant="body1">
+                This is everything in M0, plus anything that can be "quickly converted to cash" - the numbers 
+                that are in your chequings and savings accounts at your bank. When you pay for something with 
+                your debit card, it has been used essentially just like cash would have been used - paying for
+                goods or serviecs. 
+            </Typography>
+            <Typography variant="body">
+                Of course, it can't <em>all</em> be "quickly converted to cash". The amount that can be converted 
+                to cash is obviously M1-M0.
+            </Typography>
+        </Box>
     )
 }
 
