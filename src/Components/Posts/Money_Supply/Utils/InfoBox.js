@@ -15,13 +15,40 @@ function M1Box() {
         <Box>
             <Typography variant="body1">
                 This is everything in M0, plus anything that can be "quickly converted to cash" - the numbers 
-                that are in your chequings and savings accounts at your bank. When you pay for something with 
+                that are in your chequings accounts at your bank. When you pay for something with 
                 your debit card, it has been used essentially just like cash would have been used - paying for
-                goods or serviecs. 
+                goods or services. 
             </Typography>
             <Typography variant="body">
                 Of course, it can't <em>all</em> be "quickly converted to cash". The amount that can be converted 
-                to cash is obviously M1-M0.
+                to cash is equal to M0, i.e., the total amount of cash. When there is a demand for more than M0 
+                paper dollars, you get a bank run.
+            </Typography>
+        </Box>
+    )
+}
+
+function M2Box() {
+    return (
+        <Box>
+            <Typography variant="body1">
+                This is everything in M1, plus other short-term savings vehicles, like your savings acocunt. It also usually includes CD's 
+                (Certificates of Deposit), and MMA's (Money Market Accounts - similar but distinct to Money Market Funds). Basically, it includes assets that are very liquid but aren't 
+                usable as a Medium of Exchange.
+            </Typography>
+        </Box>
+    )
+}
+
+function M3Box() {
+    return (
+        <Box>
+            <Typography variant="body1">
+                This is everything in M2, plus other forms of liquid deposits that would more commonly be held by large financial institutions and 
+                companies, rather than the average joe or the neighborhood sandwich store.
+            </Typography>
+            <Typography variant="body1">
+                This can include investment instruments like larger time deposits, MMF's, short-term repurchase agreements (repo's), etc.
             </Typography>
         </Box>
     )
@@ -43,6 +70,8 @@ const InfoBox = ({type}) => {
             <Typography variant="h3">{type}</Typography>
             {type === 'M0' ? <M0Box /> : 
              type === 'M1' ? <M1Box /> :
+             type === 'M2' ? <M2Box /> : 
+             type === 'M3' ? <M3Box /> :
             null}
         </Box>
     )

@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Typography, List, Divider, IconButton, Button, Grid, Card, CardMedia } from '@mui/material';
+import { Box, Typography, Drawer, Divider, IconButton, Button, Grid } from '@mui/material';
 import InfoIcon from '@mui/icons-material/Info';
 import useMoneySupply from './Hooks/useMoneySupply';
 import MoneySupplyLineChart from './Charts/MoneySupplyLineChart';
 import RadioButtonsGroup from './Utils/RadioButtons';
 import InfoBox from './Utils/InfoBox';
-import DallEPictureCard from '../../Utils/DallEPictureCar';
+import DallEPictureCard from '../../Utils/DallEPictureCard';
+import SourcesBox from './Utils/SourcesBox';
 
 function getEarliestDate(entries) {
     if (entries.length === 0) {
@@ -36,10 +37,10 @@ function getLatestDate(entries) {
   }
 
 export const MoneySupplyDash = () => {
-    const [showInfo, setShowInfo] = useState(false);
     const [curType, setCurType] = useState('M0');
     const [curCountry, setCurCountry] = useState(null);
-    const [dateRange, setDateRange] = useState([]);
+    const [dateRange, setDateRange] = useState([]); // TODO for date filtering
+    const [sourcesDrawerOpen, setSourcesDrawerOpen] = useState(null);
     const [expandGraph, setExpandGraph] = useState(false);
     const moneySupply = useMoneySupply();
 
@@ -99,7 +100,7 @@ export const MoneySupplyDash = () => {
                     <Typography variant='h5'>{curCountry === "CAN" ? 'Canada' : 'United States'} | {curType}</Typography> 
                     <Typography variant='body1'>Values given in billions of the local currency.</Typography>
                 </Box>
-                <IconButton onClick={() => setShowInfo(!showInfo)}>
+                <IconButton onClick={() => setSourcesDrawerOpen(!sourcesDrawerOpen)}>
                     <InfoIcon />
                 </IconButton>
             </Box>           
@@ -139,9 +140,12 @@ export const MoneySupplyDash = () => {
                     <InfoBox type={curType}/>
                 </Grid>
                 <Grid item xs={4}>
-                    <DallEPictureCard />
+                    <DallEPictureCard prompt={"minimalist digital art of a man pondering over a stack of cash, with dark blue and orange color scheme"}/>
                 </Grid>
             </Grid>
+            <Drawer open={sourcesDrawerOpen} variant='persistent' anchor='bottom'>
+                <SourcesBox country={curCountry}/>
+            </Drawer>
         </Box>
     )
 }
