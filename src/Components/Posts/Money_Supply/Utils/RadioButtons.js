@@ -19,11 +19,11 @@ const RadioButtonsGroup = ({type, handleChange, label, buttons, disable=null}) =
         {buttons.map((b) => {
           if (b === disable) {
             return (
-              <FormControlLabel value={b} control={<Radio />} label={b} disabled/>
+              <FormControlLabel key={b} value={b} control={<Radio />} label={b} disabled/>
             )
           }
           return (
-            <FormControlLabel value={b} control={<Radio />} label={b} />
+            <FormControlLabel key={b} value={b} control={<Radio />} label={b} />
           )
         })}
       </RadioGroup>
