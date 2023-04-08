@@ -17,7 +17,8 @@ const RadioButtonsGroup = ({type, handleChange, label, buttons, disable=null}) =
         onChange={handleChange}
       >
         {buttons.map((b) => {
-          if (b === disable) {
+          // Renders the buttons if they are not part of the disabled array
+          if (disable && disable.includes(b)) {
             return (
               <FormControlLabel key={b} value={b} control={<Radio />} label={b} disabled/>
             )
