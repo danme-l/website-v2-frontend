@@ -38,7 +38,7 @@ function getLatestDate(entries) {
 
 export const MoneySupplyDash = () => {
     const [curType, setCurType] = useState('M0');
-    const [curCountry, setCurCountry] = useState(null);
+    const [curCountry, setCurCountry] = useState('USA');
     const [dateRange, setDateRange] = useState([]); // TODO for date filtering
     const [sourcesDrawerOpen, setSourcesDrawerOpen] = useState(null);
     const [expandGraph, setExpandGraph] = useState(false);
@@ -59,7 +59,9 @@ export const MoneySupplyDash = () => {
     const buttonDisabler = () => {
         // so the button is disabled but still appears
         if (curCountry == 'USA') {
-            return 'M3'
+            return ['M3', 'M4']
+        } else if (curCountry == 'CAN') {
+            return ['M4']
         }
     };
 
@@ -86,6 +88,12 @@ export const MoneySupplyDash = () => {
           return entryDate >= date1 && entryDate <= date2;
         });
       }
+
+    let countryMap = {
+        'CAN': {'name': 'Canada', currency: 'CAD'},
+        'USA': {'name': 'The United States', currency: 'USD'},
+        'GBR': {'name': 'Great Britain', currency: 'GBP'}
+    }
     
     return (
         <Box sx={{m:2}}>
@@ -96,8 +104,7 @@ export const MoneySupplyDash = () => {
                     <Typography variant='body1'>How much money exists in various places?</Typography>
                 </Box>
                 <Box sx={{mx:2}}>
-                    {/* For now there's only two countries */}
-                    <Typography variant='h5'>{curCountry === "CAN" ? 'Canada' : 'United States'} | {curType}</Typography> 
+                    <Typography variant='h5'>{countryMap[curCountry]['name']} | {curType}</Typography> 
                     <Typography variant='body1'>Values given in billions of the local currency.</Typography>
                 </Box>
                 <IconButton onClick={() => setSourcesDrawerOpen(!sourcesDrawerOpen)}>
@@ -107,7 +114,7 @@ export const MoneySupplyDash = () => {
             <Divider sx={{my:2}}/>
             <Grid container>
                 <Grid item xs={expandGraph ? 12 : 8}>
-                    <MoneySupplyLineChart data={getValuesByTypeAndCountry(curType, curCountry)} />
+                    <MoneySupplyLineChart data={getValuesByTypeAndCountry(curType, curCountry)}  currency={countryMap[curCountry]['currency']}/>
                 </Grid>
                 <Grid item xs={expandGraph ? 5 : 3}>
                     <Box display={'flex'} flexDirection={'column'}>
@@ -115,14 +122,14 @@ export const MoneySupplyDash = () => {
                             type={curType} 
                             handleChange={handleTypeChange} 
                             label={'Money Supply Type'} 
-                            buttons={['M0','M1','M2','M3']}
+                            buttons={['M0','M1','M2','M3', 'M4']}
                             disable={buttonDisabler()}
                         />
                         <RadioButtonsGroup 
                             type={curCountry} 
                             handleChange={handleCountryChange} 
                             label={'Country'} 
-                            buttons={['CAN','USA']}
+                            buttons={['CAN','USA', 'GBR']}
                         />
                         <Button 
                             sx={{width:'50%'}} 
