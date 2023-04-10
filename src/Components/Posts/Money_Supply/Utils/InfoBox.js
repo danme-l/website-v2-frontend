@@ -54,6 +54,19 @@ function M3Box() {
     )
 }
 
+function M4Box() {
+    return (
+        <Box>
+            <Typography variant="body1">
+                This is everything in M3, plus certain other kinds lending to the private sector. It includes not only liquid assets, but credit extended by the banks. 
+            </Typography>
+            <Typography variant="body1">
+                Usually it doesn't include collateralized loans like your mortgage; it does typically include credit card debt, overdrafts, business loans, etc.
+            </Typography>
+        </Box>
+    )
+}
+
 const InfoBox = ({type}) => {
     return (
         <Box sx={{mx:4, my:4}}>
@@ -72,6 +85,7 @@ const InfoBox = ({type}) => {
              type === 'M1' ? <M1Box /> :
              type === 'M2' ? <M2Box /> : 
              type === 'M3' ? <M3Box /> :
+             type === 'M4' ? <M4Box /> :
             null}
         </Box>
     )

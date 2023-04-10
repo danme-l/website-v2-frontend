@@ -10,7 +10,7 @@ const SourcesBox = ({country, sourceName, sourceLink}) => {
                         <Typography variant='body1'>
                             Bank of Canada, via StatsCan.
                         </Typography>
-                        <Typography variant='body'>
+                        <Typography variant='body1'>
                             <Link href='https://www150.statcan.gc.ca/t1/tbl1/en/cv.action?pid=1010011601'>
                                 StatsCan website.
                             </Link>
@@ -23,9 +23,22 @@ const SourcesBox = ({country, sourceName, sourceLink}) => {
                         <Typography variant='body1'>
                             St Louis Federal Reserve, through their amazing FRED API.
                         </Typography>
-                        <Typography variant='body'>
+                        <Typography variant='body1'>
                             <Link href='https://fred.stlouisfed.org/categories/24'>
                                 FRED Website
+                            </Link>
+                        </Typography>
+                    </Box>
+                )
+            case 'GBR':
+                return (
+                    <Box>
+                        <Typography variant='body1'>
+                            Bank of England Database.
+                        </Typography>
+                        <Typography variant='body1'>
+                            <Link href='https://www.bankofengland.co.uk/boeapps/database/default.asp'>
+                                BoE Database.
                             </Link>
                         </Typography>
                     </Box>

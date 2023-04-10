@@ -6,27 +6,6 @@ import CustomTooltip from './CustomToolTip';
 const MoneySupplyLineChart = ({data, currency}) => {
     const theme = useTheme();
 
-    // for dollars
-    const moneyFormatter = new Intl.NumberFormat('en-US', {
-        style: 'currency',
-        currency: 'USD',
-    });
-
-    const moneyFormatter2 = (c) => {
-        if (c === 'CAN' || c === 'USA') {
-            return new Intl.NumberFormat('en-US', {
-                style: 'currency',
-                currency: 'USD',
-            });
-        } else if (c === 'GBR') {
-            return new Intl.NumberFormat('en-UK', {
-                style: 'currency',
-                currency: 'GBP',
-            });
-        }
-
-    }
-
     function getCurrencyFormatter(countryCode) {
         const options = { style: 'currency', currency: countryCode };
         return new Intl.NumberFormat(undefined, options);
