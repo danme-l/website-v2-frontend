@@ -40,15 +40,24 @@ export const OpecShareStackedAreaChart = ({data}) => {
 export const OpecCountriesStackedAreaChart = ({data}) => {
     const theme = useTheme();
 
-    function getCountryArray(arr) {
-        let countries = [];
-        for(let i=0; i<arr.length; i++) {
-            if(!countries.includes(arr[i].country)) {
-                countries.push(arr[i].country)
-            }
-        }
-        return countries;
-    }
+    function getColor(index) {
+        const startColor = [0, 155, 244];
+        const endColor = [0, 60, 95]; 
+        
+        const rDiff = endColor[0] - startColor[0];
+        const gDiff = endColor[1] - startColor[1];
+        const bDiff = endColor[2] - startColor[2];
+        
+        const rIncrement = rDiff / 12;
+        const gIncrement = gDiff / 12;
+        const bIncrement = bDiff / 12;
+        
+        const r = Math.round(startColor[0] + index * rIncrement);
+        const g = Math.round(startColor[1] + index * gIncrement);
+        const b = Math.round(startColor[2] + index * bIncrement);
+        
+        return "#" + [r, g, b].map(c => c.toString(16).padStart(2, "0")).join("");
+      }
 
     const opecCountries = ['Algeria', 'Angola', 'Congo', 'Equatorial Guinea', 'Gabon', 'IR Iran', 'Iraq', 'Kuwait', 'Libya', 'Nigeria', 'Saudi Arabia', 'United Arab Emirates', 'Venezuela']
 
@@ -77,9 +86,11 @@ export const OpecCountriesStackedAreaChart = ({data}) => {
                 <YAxis />
                 <Tooltip />
                 <Legend />
-                {opecCountries.map((c) => {
+                {opecCountries.map((c, i) => {
                     return (
-                        <Area type={'monotone'} dataKey={c} stackId="1" />
+                        <Area type={'monotone'} dataKey={c} stackId="1" 
+                            stroke={getColor(i)}
+                            fill={getColor(i)}/>
                     )
                 })}
             </AreaChart>
