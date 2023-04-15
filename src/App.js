@@ -16,6 +16,7 @@ import PageInProgress from './Components/Misc/PageInProgress';
 import { HouseholdDebt } from './Components/Posts/Household_Debt/Household_Debt';
 import { WeoDashboard } from './Components/Posts/World Economic Outlook/WeoDashboard';
 import { MoneySupplyDash } from './Components/Posts/Money_Supply/MoneySupplyDash';
+import { OpecDash } from './Components/Posts/Opec/OpecDash';
 import { About } from './Components/About/About';
 import { Contact } from './Components/Contact';
 
@@ -45,6 +46,7 @@ function App() {
               <Route name="household_debt" path='/household_debt' element={<HouseholdDebt />} /> 
               <Route name="world_econ_outlook" path='/world_econ_outlook' element={<WeoDashboard />} /> 
               <Route name="money_supply" path='/money_supply' element={<MoneySupplyDash />} /> 
+              <Route name="opec" path='/opec' element={<OpecDash />} /> 
               <Route name="posts" path="/posts" element={<PageInProgress pageName={'Posts'} />} />
               <Route name="about" path="/about" element={<About />} />
               <Route name="contact" path="/contact" element={<Contact />} />
