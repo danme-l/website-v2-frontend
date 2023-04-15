@@ -19,12 +19,13 @@ export const XAveButtonMenu = ({x, handleSetRollingAve}) => {
   return (
     <div>
       <Button
-        sx={{fontSize:'1.5em'}}
+        sx={{fontSize:'1.5em', mr:1}}
         id="basic-button"
         aria-controls={open ? 'basic-menu' : undefined}
         aria-haspopup="true"
         aria-expanded={open ? 'true' : undefined}
         onClick={handleClick}
+        variant='outlined'
       >
         {x}
       </Button>
