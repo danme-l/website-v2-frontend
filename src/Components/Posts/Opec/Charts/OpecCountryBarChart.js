@@ -7,7 +7,11 @@ const RemovedCountriesBox = ({ removedCountries, onRestoreCountry }) => {
     return (
       <Box>
         {removedCountries.map((country) => (
-          <Button key={country.country} onClick={() => onRestoreCountry(country)}>
+          <Button 
+            sx={{m:1}}
+            key={country.country} 
+            onClick={() => onRestoreCountry(country)}
+            variant='contained'>
             {country.country}
           </Button>
         ))}
@@ -23,6 +27,7 @@ export const OpecCountryBarchart = ({data, barchartYear}) => {
 
     useEffect(() => {
         setChartData(data.filter((d) => d.year == barchartYear));
+        setRemovedCountries([])
     }, [data]);
 
     // click a bar to remove the country from the chart
@@ -43,11 +48,14 @@ export const OpecCountryBarchart = ({data, barchartYear}) => {
       };
 
     const handleRestoreCountry = (country) => {
-        const restoredCountry = removedCountries.find((item) => item.country === restoredCountry)
+      // finds the country from the button click in the array of removed countries
+        const restoredCountry = removedCountries.find((item) => item.country === country.country)
         if (restoredCountry) {
+            // add it back to the chart data 
             const newChartData = [...chartData, restoredCountry];
             setChartData(newChartData);
-            const newRemovedCountries = removedCountries.filter((item) => item.country !== country);
+            // remove it from the removed countries array
+            const newRemovedCountries = removedCountries.filter((item) => item.country !== country.country);
             setRemovedCountries(newRemovedCountries);
         }
     }
@@ -83,7 +91,7 @@ export const OpecCountryBarchart = ({data, barchartYear}) => {
                 </Bar>
             </BarChart>
             {/* Readding removed countries needs some work */}
-            {/* <RemovedCountriesBox removedCountries={removedCountries} onRestoreCountry={handleRestoreCountry} /> */}
+            <RemovedCountriesBox removedCountries={removedCountries} onRestoreCountry={handleRestoreCountry} />
         </Box>
     )
 }

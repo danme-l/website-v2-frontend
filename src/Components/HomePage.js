@@ -22,6 +22,10 @@ export const HomePage = () => {
                 <Typography variant='body1'>
                     See the about page to the left for more info.
                 </Typography>
+                <Typography variant='body2'>
+                    May 9, 2023: I am currently having an issue with the database that I do not have the time at the moment to troubleshoot. 
+                    As such, I am currently considering this project "on pause" until I can circle back to it.
+                </Typography>
               </Paper>
             </Grid>
 

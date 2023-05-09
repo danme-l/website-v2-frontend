@@ -17,6 +17,10 @@ const theme = createTheme({
       body1: {
         // textIndent: 20,
         textAlign: 'left',
+      },
+      body2: {
+        fontWeight: 'bold',
+        fontSize: 14,
       }
     },
     palette: {
