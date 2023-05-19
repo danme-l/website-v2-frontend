@@ -8,11 +8,11 @@ import Typography from '@mui/material/Typography';
 import { CustomNavLink } from './Utils/customStyledComponents'
 import theme from '../theme';
 
-export const HomeCard = ({
+export const AnalyticsCard = ({
     disableCard=true, 
     imgLink="/static/cards/question_mark.jpeg", 
     link,
-    title="Page ___", 
+    title="Nothing yet...", 
     desc="I'll get here eventually"
   }) => {
   return (

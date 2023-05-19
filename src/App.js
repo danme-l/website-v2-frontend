@@ -19,6 +19,8 @@ import { MoneySupplyDash } from './Components/Posts/Money_Supply/MoneySupplyDash
 import { OpecDash } from './Components/Posts/Opec/OpecDash';
 import { About } from './Components/About/About';
 import { Contact } from './Components/Contact';
+import { AnalyticsHome } from './Components/AnalyticsHome';
+import { BlogHome } from './Components/BlogHome';
 
 function App() {
   return (
@@ -43,6 +45,8 @@ function App() {
             <Routes>
               <Route name="home" path="/" element={<HomePage />} />
               <Route name="home" path="/Home" element={<HomePage />} />
+              <Route name="analytics" path="/analytics" element={<AnalyticsHome />} />
+              <Route name="blog" path="/blog" element={<BlogHome />} />
               <Route name="household_debt" path='/household_debt' element={<HouseholdDebt />} /> 
               <Route name="world_econ_outlook" path='/world_econ_outlook' element={<WeoDashboard />} /> 
               <Route name="money_supply" path='/money_supply' element={<MoneySupplyDash />} /> 

@@ -6,6 +6,8 @@ import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import HomeIcon from '@mui/icons-material/Home';
 import InfoIcon from '@mui/icons-material/Info';
+import AnalyticsIcon from '@mui/icons-material/Analytics';
+import EditIcon from '@mui/icons-material/Edit';
 import ContactPageIcon from '@mui/icons-material/ContactPage';
 import AssignmentIcon from '@mui/icons-material/Assignment';
 import { NavLink } from 'react-router-dom';
@@ -25,6 +27,7 @@ const CustomNavLink = styled(NavLink)`
 
 export const mainListItems = (
   <React.Fragment>
+    {/* HOME */}
     <CustomNavLink to='home'>
       <ListItemButton sx={{ "&:hover": { backgroundColor: `${theme.palette.secondary.main}`} }}>
         <ListItemIcon>
@@ -33,6 +36,25 @@ export const mainListItems = (
         <ListItemText primary="Home" />
       </ListItemButton>
     </CustomNavLink>
+    {/* ANALYTICS */}
+    <CustomNavLink to='analytics'>
+      <ListItemButton sx={{ "&:hover": { backgroundColor: `${theme.palette.secondary.main}`} }}>
+        <ListItemIcon>
+          <AnalyticsIcon />
+        </ListItemIcon>
+        <ListItemText primary="Analytics" />
+      </ListItemButton>
+    </CustomNavLink>
+    {/* BLOG */}
+    <CustomNavLink to='blog'>
+      <ListItemButton sx={{ "&:hover": { backgroundColor: `${theme.palette.secondary.main}`} }}>
+        <ListItemIcon>
+          <EditIcon />
+        </ListItemIcon>
+        <ListItemText primary="Blog" />
+      </ListItemButton>
+    </CustomNavLink>
+    {/* ABOUT */}
     <CustomNavLink to='about'>
       <ListItemButton sx={{ "&:hover": { backgroundColor: `${theme.palette.secondary.main}`} }}>
         <ListItemIcon>
@@ -41,6 +63,7 @@ export const mainListItems = (
         <ListItemText primary="About" />
       </ListItemButton>
     </CustomNavLink>
+    {/* CONTACT */}
     <CustomNavLink to='contact'>
       <ListItemButton sx={{ "&:hover": { backgroundColor: `${theme.palette.secondary.main}`} }}>
         <ListItemIcon>

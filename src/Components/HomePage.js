@@ -22,65 +22,27 @@ export const HomePage = () => {
                 <Typography variant='body1'>
                     See the about page to the left for more info.
                 </Typography>
-                <Typography variant='body2'>
-                    May 9, 2023: I am currently having an issue with the database that I do not have the time at the moment to troubleshoot. 
-                    As such, I am currently considering this project "on pause" until I can circle back to it.
-                </Typography>
               </Paper>
             </Grid>
 
-            <Grid item xs={12} md={6} lg={4} xl={3}>
-                <HomeCard imgLink={"/static/cards/bill.webp"} 
-                    title='Household Debt' 
-                    desc="Comparison of household debt in various countries"
+            <Grid item xs={6}>
+                <HomeCard imgLink={"/static/cards/measure.jpg"} 
+                    title='Analytics' 
+                    desc="Datablog, Visualizations, etc"
                     disableCard={false}
-                    link='/household_debt'
+                    link='/analytics'
                 />
             </Grid>
 
-            <Grid item xs={12} md={6} lg={4} xl={3}>
-                <HomeCard imgLink={"/static/cards/imf-building.jpeg"} 
-                    title='World Economic Outlook' 
-                    desc="A look at the IMF's World Economic Outlook, October 2022"
+            <Grid item xs={6}>
+                <HomeCard imgLink={"/static/cards/notebook.jpg"} 
+                    title='Blog' 
+                    desc="Stuff I've Learned"
                     disableCard={false}
-                    link='/world_econ_outlook'
+                    link='/blog'
                 />
             </Grid>
 
-            <Grid item xs={12} md={6} lg={4} xl={3}>
-                <HomeCard imgLink={"/static/cards/bills.jpeg"} 
-                    title='Money Supply' 
-                    desc="How much money exists? M0, M1, etc"
-                    disableCard={false}
-                    link='/money_supply'
-                />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4} xl={3}>
-                <HomeCard imgLink={"/static/cards/opec.jpg"} 
-                    title='Looking at OPEC' 
-                    desc="How much oil comes from them?"
-                    disableCard={false}
-                    link='/opec'
-                />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4} xl={3}>
-                <HomeCard />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4} xl={3}>
-                <HomeCard />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4} xl={3}>
-                <HomeCard />
-            </Grid>
-
-            <Grid item xs={12} md={6} lg={4} xl={3}>
-                <HomeCard />
-            </Grid>
-            
         </Grid>
     </Box>
   );
