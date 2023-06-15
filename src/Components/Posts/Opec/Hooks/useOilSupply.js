@@ -5,7 +5,7 @@ function useOilSupply() {
 
     useEffect(() => {
         async function fetchOilSupply() {
-            const response = await fetch('http://localhost:5000/oil/oil_production');
+            const response = await fetch('https://website-v2-backend.onrender.com/oil/oil_production');
             const data = await response.json();
             setOilSupply(data);
         }
