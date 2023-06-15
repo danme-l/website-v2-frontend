@@ -58,7 +58,12 @@ export const AnalyticsHome = () => {
             </Grid>
 
             <Grid item xs={12} md={6} lg={4} xl={3}>
-                <AnalyticsCard />
+                <AnalyticsCard imgLink={"/static/cards/house.jpeg"} 
+                    title='Mortgages & Affordability' 
+                    desc="What does your house cost you?"
+                    disableCard={false}
+                    link='/mortgages'
+                />
             </Grid>
 
             <Grid item xs={12} md={6} lg={4} xl={3}>

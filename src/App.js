@@ -17,6 +17,7 @@ import { HouseholdDebt } from './Components/Posts/Household_Debt/Household_Debt'
 import { WeoDashboard } from './Components/Posts/World Economic Outlook/WeoDashboard';
 import { MoneySupplyDash } from './Components/Posts/Money_Supply/MoneySupplyDash';
 import { OpecDash } from './Components/Posts/Opec/OpecDash';
+import { Mortgages } from './Components/Posts/Mortgage_Calculator/Mortgages';
 import { About } from './Components/About/About';
 import { Contact } from './Components/Contact';
 import { AnalyticsHome } from './Components/AnalyticsHome';
@@ -51,6 +52,7 @@ function App() {
               <Route name="world_econ_outlook" path='/world_econ_outlook' element={<WeoDashboard />} /> 
               <Route name="money_supply" path='/money_supply' element={<MoneySupplyDash />} /> 
               <Route name="opec" path='/opec' element={<OpecDash />} /> 
+              <Route name="opec" path='/mortgages' element={<Mortgages />} /> 
               <Route name="posts" path="/posts" element={<PageInProgress pageName={'Posts'} />} />
               <Route name="about" path="/about" element={<About />} />
               <Route name="contact" path="/contact" element={<Contact />} />
