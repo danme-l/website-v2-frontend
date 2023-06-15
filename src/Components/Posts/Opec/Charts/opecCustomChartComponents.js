@@ -1,4 +1,4 @@
-import { Paper, Typography, Table, TableRow, TableCell } from "@mui/material";
+import { Paper, Typography, Table, TableRow, TableBody, TableCell } from "@mui/material";
 
 export const CustomTooltipStackedChart = ({ active, payload, label }) => {
     if (active && payload && payload.length) {
@@ -30,14 +30,16 @@ export const CustomTooltipAveLineChart = ({ active, payload, label }) => {
       <Paper sx={{p:2, opacity:0.85}}>
         <Typography variant="h5">{label}</Typography>
         <Table size="small">
-          <TableRow>
-              <TableCell align='left'>Non-Opec</TableCell>
-              <TableCell align='left'>{(payload[0].payload['not_opec_roll_ave']).toFixed(3)}</TableCell>
-          </TableRow>
-          <TableRow>
-              <TableCell align='left'>Opec</TableCell>
-              <TableCell align='left'>{(payload[0].payload['opec_roll_ave']).toFixed(3)}</TableCell>
-          </TableRow>
+          <TableBody>
+            <TableRow>
+                <TableCell align='left'>Non-Opec</TableCell>
+                <TableCell align='left'>{(payload[0].payload['not_opec_roll_ave']).toFixed(3)}</TableCell>
+            </TableRow>
+            <TableRow>
+                <TableCell align='left'>Opec</TableCell>
+                <TableCell align='left'>{(payload[0].payload['opec_roll_ave']).toFixed(3)}</TableCell>
+            </TableRow>
+          </TableBody>
         </Table>
       </Paper>
     );

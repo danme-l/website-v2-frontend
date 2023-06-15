@@ -13,7 +13,6 @@ function useOilSupply() {
         fetchOilSupply();
     }, []);
 
-    console.log(oilSupply)
     return oilSupply;
 }
 

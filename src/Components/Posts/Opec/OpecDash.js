@@ -1,13 +1,16 @@
 import React, { useState } from 'react';
-import { Box, Typography, Grid, Link } from "@mui/material";
+import { Box, Typography, Grid, Link, Divider, Slider, Stack } from "@mui/material";
 import useOilSupply from './Hooks/useOilSupply';
 import { OpecShareStackedAreaChart, OpecCountriesStackedAreaChart } from './Charts/OpecStackedAreaChart';
 import { OpecAveLineChart } from './Charts/OpecAveLineChart';
+import { OpecCountryBarchart } from './Charts/OpecCountryBarChart';
 import { XAveButtonMenu } from './Utils/XAveButtonMenu';
 
 export const OpecDash = () => {
     const [rollingAveYears, setRollingAveYears] = useState(5);
+    const [barchartYear, setBarchartYear] = useState(2020)
     const oilSupply = useOilSupply();
+    var years = [...new Set(oilSupply.map((r) => r.year))]
     
     // console.log(oilSupply.filter(entry => entry.in_opec === 1))
 
@@ -73,12 +76,14 @@ export const OpecDash = () => {
         setRollingAveYears(e.target.value)
     }
 
-    console.log(getWideFormatCountryArray(oilSupply.filter(c => c.in_opec === 1)))
-    // console.log(oilSupply);
+    function valuetext(value) {
+        return `${value}°C`;
+      }
 
     return (
         <Box sx={{mx:6}}>
-            {/* Intro */}
+            {/* Intro */} 
+            <Divider sx={{m:2}}/>
             <Typography variant="h2">OPEC</Typography>
             <Typography variant='body1'>
                 On April 3rd, OPEC announced a production cut (<Link href='https://www.opec.org/opec_web/en/press_room/7120.htm'>press release</Link>) 
@@ -94,6 +99,7 @@ export const OpecDash = () => {
             </Typography>
 
             {/* SECTION: Share of global production */}
+            <Divider sx={{m:2}}/>
             <Typography variant='h4'>Historic share of crude oil production</Typography>
             <Typography variant='body1'>
                 OPEC member states constitute a very sizeable minority of global oil production. 
@@ -108,8 +114,22 @@ export const OpecDash = () => {
             <OpecAveLineChart data={getTotalsByYearArray(oilSupply)} rollingAveYears={rollingAveYears-1} />
 
             {/* SECTION: Breakdown by OPEC member state*/}
+            <Divider sx={{m:2}}/>
             <Typography variant='h4'>Breakdown of Crude Oil Production by OPEC Member State</Typography>
-            <OpecCountriesStackedAreaChart data={getWideFormatCountryArray(oilSupply.filter(c => c.in_opec === 1))} />
+            <Typography variant='h6'>Year: {barchartYear} | 1000 Barrels/Day</Typography>
+            {/* <OpecCountriesStackedAreaChart data={getWideFormatCountryArray(oilSupply.filter(c => c.in_opec === 1))} /> */}
+            <Stack spacing={2} direction={'row'} alignItems={'center'}>
+                <Slider
+                    sx={{height:250}}
+                    min={0} max={60}
+                    orientation='vertical'
+                    defaultValue={30}
+                    valueLabelFormat={(v) => v+1960}
+                    valueLabelDisplay="auto"
+                    onChange={(event) => setBarchartYear(years[event.target.value])}
+                    />
+                <OpecCountryBarchart data={oilSupply.filter(entry => entry.in_opec === 1)} barchartYear={barchartYear} />
+            </Stack>
         </Box>
     )
 }
