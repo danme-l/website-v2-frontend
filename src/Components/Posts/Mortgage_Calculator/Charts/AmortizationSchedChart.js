@@ -1,5 +1,5 @@
 import React from 'react';
-import { AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine } from 'recharts';
 import theme from '../../../../theme';
 import { Typography, Paper } from '@mui/material';
 
@@ -23,7 +23,7 @@ const CustomTooltip = ({ active, payload, label }) => {
     return null;
   };
 
-export const AmortizationSchedChart = ({data}) => {
+export const AmortizationSchedChart = ({data, monthlyPayment}) => {
     return (
         <LineChart
             width={900}
@@ -40,8 +40,9 @@ export const AmortizationSchedChart = ({data}) => {
             <XAxis dataKey="paymentNumber" />
             <YAxis />
             <Tooltip content={<CustomTooltip /> }/>
-            <Line type="monotone" dataKey="interestAmount" stackId="1" stroke={theme.palette.secondary.light} fill={theme.palette.secondary.light} />
-            <Line type="monotone" dataKey="principalAmount" stackId="1" stroke={theme.palette.primary.light} fill={theme.palette.primary.light} />
+            <ReferenceLine y={monthlyPayment} stroke={theme.palette.primary.dark} fill={theme.palette.primary.dark}/>
+            <Line type="monotone" dataKey="interestAmount" stroke={theme.palette.secondary.light} fill={theme.palette.secondary.light} />
+            <Line type="monotone" dataKey="principalAmount" stroke={theme.palette.primary.light} fill={theme.palette.primary.light} />
         </LineChart>
     )
 }

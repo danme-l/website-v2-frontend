@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Grid, Link, Divider, Slider, Stack } from "@mui/material";
 import { AmortizationSchedChart } from './Charts/AmortizationSchedChart';
+import { formatter } from '../../Utils/currencyFormatter';
 
 export const Mortgages = () => {
     const [homePrice, setHomePrice] = useState(500000);
@@ -133,10 +134,20 @@ export const Mortgages = () => {
             <Typography variant='h3'>Amortization Schedule</Typography>
             <Box display={'flex'} flexDirection={'row'}>
 
-              <AmortizationSchedChart data={amortizationSchedule} />
-              <Typography variant='h6'>
-                  Monthly payment: {monthlyPayment === 'NaN' ? "Enter values..." : monthlyPayment}
-              </Typography>
+              <AmortizationSchedChart data={amortizationSchedule} monthlyPayment={monthlyPayment}/>
+              <Box>
+                <Typography variant='h6'>
+                    Monthly payment: {monthlyPayment === 'NaN' ? "Enter values..." : formatter.format(monthlyPayment)}
+                </Typography>
+                <Typography variant='body1'>
+                      You will make {mortgageYears*12} total payments of {formatter.format(monthlyPayment)}, 
+                      for an entire purchase cost of {formatter.format(monthlyPayment*mortgageYears*12)}.
+                </Typography>
+                <Typography variant='body1'>
+                  {formatter.format(homePrice)} will go to your home and {formatter.format(monthlyPayment*mortgageYears*12 - homePrice)} will be paid 
+                  to the lender as interest, roughly a {(100*((monthlyPayment*mortgageYears*12 - homePrice)/ homePrice)).toFixed(2)}% cost of borrowing.
+                </Typography>
+              </Box>
             </Box>
         </Box>
 
