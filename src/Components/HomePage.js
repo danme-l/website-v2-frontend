@@ -23,8 +23,12 @@ export const HomePage = () => {
                     See the about page to the left for more info.
                 </Typography>
                 <Typography variant='body2'>
-                    May 9, 2023: I am currently having an issue with the database that I do not have the time at the moment to troubleshoot. 
+                    May, 2023: I am currently having an issue with the database that I do not have the time at the moment to troubleshoot. 
                     As such, I am currently considering this project "on pause" until I can circle back to it.
+                </Typography>
+                <Typography variant='body2'>
+                    June, 2023: Begun the process of migrating this website over to AWS, at the very least the backend. 
+                    Will be using an AWS DynamoDB instance as the new backend.
                 </Typography>
               </Paper>
             </Grid>
