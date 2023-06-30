@@ -11,7 +11,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 
     if (active && payload && payload.length) {
         const year = Math.ceil(payload[0].payload['paymentNumber'] / 12)
-        const month = payload[0].payload['paymentNumber'] % 12
+        const month = (payload[0].payload['paymentNumber'] % 12) + 1
         return (
         <Paper sx={{p:2, opacity:0.85}}>
             <Typography variant='body1'>Year {year}, Month {month}</Typography>

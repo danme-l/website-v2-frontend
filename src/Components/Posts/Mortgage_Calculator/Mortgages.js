@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Grid, Link, Divider, Slider, Stack } from "@mui/material";
 import { AmortizationSchedChart } from './Charts/AmortizationSchedChart';
+import { PaymentVsRateChart } from './Charts/PaymentVsRateChart';
 import { formatter } from '../../Utils/currencyFormatter';
 
 export const Mortgages = () => {
@@ -20,8 +21,19 @@ export const Mortgages = () => {
         const denominator = Math.pow(1 + monthlyInterestRate, totalPayments) - 1;
       
         const monthlyPayment = numerator / denominator;
-        return monthlyPayment.toFixed(2); // Return the monthly payment rounded to two decimal places
+        
+        // return the monthly payment rounded to two decimal places
+        return monthlyPayment.toFixed(2); 
       }
+
+            
+    const calculatePaymentAmount = (principal, totalPayments, monthlyInterestRate) => {
+      //  determine the monthly payment amount
+      const numerator = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalPayments);
+      const denominator = Math.pow(1 + monthlyInterestRate, totalPayments) - 1;
+    
+      return numerator / denominator;
+    };
 
     const calculateAmortizationSchedule = () => {
       // clear previous amortization schedule
@@ -54,14 +66,10 @@ export const Mortgages = () => {
       // update with the new amortization schedule
       setAmortizationSchedule(schedule);
     };
-      
-    const calculatePaymentAmount = (principal, totalPayments, monthlyInterestRate) => {
-      //  determine the monthly payment amount
-      const numerator = principal * monthlyInterestRate * Math.pow(1 + monthlyInterestRate, totalPayments);
-      const denominator = Math.pow(1 + monthlyInterestRate, totalPayments) - 1;
     
-      return numerator / denominator;
-    };
+    const handleCalculateMonthlyPayment = () => {
+      setMonthlyPayment(calculateMonthlyPayment(homePrice, downPayment, mortgageYears, interestRate));
+    }
 
     // handlers for textboxes, button
     const handleHomePriceChange = (event) => {
@@ -79,10 +87,6 @@ export const Mortgages = () => {
     const handleInterestRateChange = (event) => {
       setInterestRate(event.target.value);
     };
-
-    const handleCalculateMonthlyPayment = () => {
-      setMonthlyPayment(calculateMonthlyPayment(homePrice, downPayment, mortgageYears, interestRate));
-    }
 
     return (
         <Box sx={{m:3}}>
@@ -131,9 +135,9 @@ export const Mortgages = () => {
                 </Box>
             </Box>
             
+            {/* SECTION: Amortization Schedule */}
             <Typography variant='h3'>Amortization Schedule</Typography>
             <Box display={'flex'} flexDirection={'row'}>
-
               <AmortizationSchedChart data={amortizationSchedule} monthlyPayment={monthlyPayment}/>
               <Box>
                 <Typography variant='h6'>
@@ -149,6 +153,10 @@ export const Mortgages = () => {
                 </Typography>
               </Box>
             </Box>
+
+            {/* SECTION: Payments */}
+            <Typography variant='h3'>Payments</Typography>
+            <PaymentVsRateChart homePrice={homePrice} downPayment={downPayment} mortgageYears={mortgageYears} />
         </Box>
 
     )
